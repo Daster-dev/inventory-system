@@ -1,0 +1,101 @@
+<%- include('partials/header') %>
+
+<div class="form-box">
+  <h2>➕ إضافة منتج جديد</h2>
+  <form action="/products/add" method="POST" enctype="multipart/form-data" class="ffffffffffffff">
+    <div class="form-box-div">
+    <div class="form-row a">
+      <label>اسم المنتج:</label>
+      <input type="text" name="name" required>
+    </div>
+
+    <div class="form-row b">
+      <label>القسم:</label>
+        <input name="category" required>
+    </div>
+
+    <div class="form-row c">
+      <label>سعر الشراء:</label>
+      <input type="number" name="priceIn" step="0.01" required>
+    </div>
+
+    <div class="form-row d">
+      <label>سعر البيع:</label>
+      <input type="number" name="priceOut" step="0.01" required>
+    </div>
+
+    <div class="form-row e">
+      <label>الكمية:</label>
+      <input type="number" name="qty" required>
+    </div>
+
+    <div class="form-row h">
+      <label>تاريخ الانتهاء:</label>
+      <input type="date" name="expiryDate">
+    </div>
+
+    <div class="form-row i">
+      <label>صورة المنتج:</label>
+      <input type="file" name="img">
+    </div>
+    </div>
+    <button type="submit" class="form-submit">📦 إضافة المنتج</button>
+  </form>
+</div>
+
+<br>
+<hr>
+
+
+
+
+<h1>المنتجات المتوفرة</h1>
+<small style="display: inline-block; margin: 10px; color: #ccc;">
+  <span style="display: inline-block; width: 12px; height: 12px; background-color: #4caf50; border-radius: 50%; margin-right: 6px;"></span>
+  المنتج متوفر بشكل جيد
+</small>
+<br>
+<small style="display: inline-block; margin: 10px; color: #ccc;">
+  <span style="display: inline-block; width: 12px; height: 12px; background-color: #ffc107; border-radius: 50%; margin-right: 6px;"></span>
+  المنتج على وشك النفاد
+</small>
+<form id="searchForm" style="margin: 15px 0;">
+  <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." style="padding: 8px; width: 250px;">
+</form>
+
+<select id="filterCategory">
+  <option value="" <%= !category ? 'selected' : '' %>>كل الأقسام</option>
+  <% categories.forEach(c => { %>
+    <option value="<%= c %>" <%= (c === category) ? 'selected' : '' %>><%= c %></option>
+  <% }) %>
+</select>
+
+
+
+<div id="productList">
+  <% products.forEach(p => { %>
+    <div class="product-card 
+  <% if (p.qty === 0) { %> out <% } 
+     else if (p.qty < 5) { %> low <% } 
+     else { %> ok <% } %>" data-name="<%= p.name.toLowerCase() %>">
+  <% if (p.imgPath) { %>
+    <img src="<%= p.imgPath %>" alt="<%= p.name %>" id="imgClick">
+  <% } %>
+  <h3><%= p.name %></h3>
+  <p>القسم: <strong><%= p.category %></strong></p>
+  <p>الكمية: <%= p.qty %></p>
+
+  <button class="sell-btn" data-id="<%= p.id %>">تم البيع</button>
+
+  <form action="/products/delete/<%= p.id %>" method="POST" style="margin-top:5px;" onsubmit="return confirm('⚠️ هل أنت متأكد من حذف المنتج؟');">
+    <button type="submit" class="del-btn" style="background:#c00; color:#fff;">🗑 حذف المنتج</button>
+  </form>
+
+
+</div>
+
+  <% }) %>
+</div>
+
+<script src="/js/main.js"></script>
+<%- include('partials/footer') %>

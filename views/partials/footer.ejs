@@ -1,0 +1,55 @@
+  <!-- <hr>
+  <p style="font-size:0.9em;">نسخة تجريبية للنظام</p> -->
+  <footer class="footer">
+  <div style="margin-right: 50px;" class="footer-search">
+    <p>قائمة الوصولات</p>
+    <ul>
+    <li><label for="receiptId">🔎 إدخال رقم عملية البيع:</label>
+    <form style="text-align: right;" onsubmit="goToReceipt(event)">
+      <input type="text" name="receiptId" id="receiptId" placeholder="اكتب رقم العملية..." required>
+      <button type="submit">عرض الوصل</button>
+    </form></li>
+    <li><label for="">عرض جميع الوصولات</label>
+      <a href="/reports/week"><button>اضغط هنا</button></a>
+    </li>
+    </ul>
+  </div>
+
+  <div class="footer-nav">
+    <p>الصفحات الرئيسية</p>
+    <ul style="margin-right: 60px;">
+      <li><a href="/">🏠 الرئيسية</a></li>
+      <li><a href="/products">➕ إضافة منتج</a></li>
+      <li><a href="/stats">📊 الإحصائيات</a></li>
+      <li><a href="/notifications">🔔 الاشعارات</a></li>
+      <li><a href="/profit">📈 الأرباح</a></li>
+      <li><a href="/help">📘 المساعدة</a></li>
+    </ul>
+  </div>
+
+
+  <div class="footer-nav">
+    <p>هل تواجه مشكلة ؟</p>
+    <small>اذا واجهتك اي مشكلة سواء تقنية او غيرها <br> لا تتردد بالاتصال بي <br> مساعدة موجود اغلب اوقات اليوم  <br> و ما علاج اي مشكلة ما راح يطول اكثر من دقائق معدوة <br> لان النظام متكامل و مشكاله بسيطة <br><a style="text-decoration: underline;" href="https://api.whatsapp.com/send?phone=9647761763665">اضغط هنا للتواصل معي</a></small>
+  </div>
+
+  <div class="footer-copy">
+    <p>جميع الحقوق محفوظة © 2025 <a href="https://api.whatsapp.com/send?phone=9647761763665" target="_blank" style="text-decoration: underline;">علي هادي</a></p>
+  </div>
+</footer>
+
+<script>
+  function goToReceipt(e) {
+    e.preventDefault();
+    const id = document.getElementById('receiptId').value.trim();
+    if (id) {
+      window.location.href = `/receipt/${id}`;
+    }
+  }
+</script>
+
+<script src="/js/main.js"></script>
+
+
+</body>
+</html>

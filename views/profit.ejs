@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<div class="profit-box">
+  <h2>📈 صفحة الأرباح</h2>
+  <table class="profit-table">
+    <tr>
+      <th>💸 إجمالي المصروف</th>
+      <td><%= totalBuy.toLocaleString() %> دينار</td>
+    </tr>
+    <tr>
+      <th>🛍️ إجمالي المبيعات</th>
+      <td><%= totalSell.toLocaleString() %> دينار</td>
+    </tr>
+    <tr class="profit-row <%= profit >= 0 ? 'gain' : 'loss' %>">
+      <th>📊 الربح الصافي</th>
+      <td><%= profit.toLocaleString() %> دينار</td>
+    </tr>
+  </table>
+</div>
+
+<h3 style="color:#00c2ff; margin-top:40px;">📊 الربح اليومي في هذا الشهر</h3>
+<div class="chart-container">
+  <canvas id="dailyProfitChart"></canvas>
+</div>
+
+
+<!-- أولاً: مكتبة الرسم -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- ثانيًا: البيانات (لازم قبل سكربت الرسم) -->
+<script>
+  window.profitDates = <%- JSON.stringify(profitDates) %>;
+  window.profitValues = <%- JSON.stringify(profitValues) %>;
+</script>
+
+<!-- ثالثًا: سكربت الرسم البياني -->
+<script src="/js/profitChart.js"></script>
+
+
+<%- include('partials/footer') %>

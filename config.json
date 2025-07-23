@@ -1,0 +1,25 @@
+{
+  "projectName": "محاسباتي",
+  "projectIMG":"https://cdn-icons-png.flaticon.com/512/4854/4854186.png",
+  "description": "نظام بيع وجرد وحساب أرباح بشكل مبسط للمشاريع الصغيرة",
+  "author": "علي هادي",
+  "license": {
+    "mac": "18:c0:4d:37:69:1b",
+    "activated": true,
+    "activatedAt": "2025-07-20T04:25:00Z"
+  },
+  "appearance": {
+    "theme": "dark",
+    "language": "ar",
+    "rtl": true
+  },
+  "notifications": {
+    "enableReceiptAlerts": true,
+    "lowStockWarning": true
+  },
+  "defaults": {
+    "currency": "دينار عراقي",
+    "printCopies": 1,
+    "profitThreshold": 10000
+  }
+}
