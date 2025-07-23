@@ -43,6 +43,28 @@ app.locals.projectName = config.projectName;
 app.locals.projectIMG = config.projectIMG
 
 
+//*لحفظ التعديلات في github
+/*
+!  git add .
+!  git commit -m "تعديل جديد"
+!  git push origin master
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
