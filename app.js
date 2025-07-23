@@ -66,8 +66,6 @@ app.locals.projectIMG = config.projectIMG
 
 
 
-
-
 //! توجيه للمنتجات كصفحة رئيسية
 app.get('/', (req, res) => res.redirect('/products'));
 
