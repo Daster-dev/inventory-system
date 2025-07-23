@@ -60,7 +60,9 @@ app.locals.projectIMG = config.projectIMG
 
 
 
-
+app.get('/hello', (req, res) => {
+  res.render('index', { activePage: 'home' });  
+});
 
 
 
