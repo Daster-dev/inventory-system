@@ -25,7 +25,12 @@
   <ul class="nav-links">
     <li><a href="/products"  class="<%= activePage === 'products' ? 'active' : '' %>">المنتجات</a></li>
     <li><a href="/stats"  class="<%= activePage === 'stats' ? 'active' : '' %>">الإحصائيات</a></li>
-    <li><a href="/notifications"  class="<%= activePage === 'notification' ? 'active' : '' %>">التنبيهات</a></li>
+    <li>
+      <a href="/notifications"  class="<%= activePage === 'notification' ? 'active' : '' %> notification-link">
+        التنبيهات
+        <span class="notification-badge"></span>
+      </a>
+    </li>
     <li><a href="/profit"  class="<%= activePage === 'profit' ? 'active' : '' %>">الأرباح</a></li>
     <li><a href="/reports/week" >التقرير الأسبوعي</a></li>
     <li><a href="/help"  class="<%= activePage === 'help' ? 'active' : '' %>">المساعدة</a></li>
@@ -63,3 +68,15 @@
   <div class="ball"></div>
   <div class="blur-overlay"></div>
 </div>
+
+
+<script>
+  // إذا كانت هناك إشعارات (مثلاً بالعدد أو بقائمة من السيرفر)
+  fetch('/notifications-count')
+    .then(res => res.json())
+    .then(data => {
+      if (data.count && data.count > 0) {
+        document.querySelector('.notification-badge').style.display = 'inline-block';
+      }
+    });
+</script>

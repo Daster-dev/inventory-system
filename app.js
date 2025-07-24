@@ -42,7 +42,6 @@ function generateId() { return Date.now().toString(); }
 app.locals.projectName = config.projectName;
 app.locals.projectIMG = config.projectIMG
 
-
 //*لحفظ التعديلات في github
 /*
 !  git add .
@@ -330,6 +329,27 @@ app.get('/notifications', async (req, res, next) => {
   }
 });
 
+
+
+app.get('/notifications-count', async (req, res, next) => {
+  try {
+    const now        = new Date();
+    const limitDays  = 14; // افتراضي – تقدر تخليه ديناميكي
+    const threshold  = new Date(now.getTime() - limitDays * 24 * 60 * 60 * 1000);
+
+    const products = await Product.find().lean();
+
+    const lowStock = products.filter(p => p.qty < 5);
+    const inactive = products.filter(p => !p.lastSold || new Date(p.lastSold) < threshold);
+    const expired  = products.filter(p => p.expiryDate && new Date(p.expiryDate) < now);
+
+    const total = lowStock.length + inactive.length + expired.length;
+
+    res.json({ count: total });
+  } catch (err) {
+    next(err);
+  }
+});
 
 
 
