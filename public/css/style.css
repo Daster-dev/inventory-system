@@ -9,7 +9,7 @@ body {
   text-align: center; /* يحرك النصوص والعناوين للوسط */
   font-family: 'Cairo', sans-serif;
   background-color: #1c1c1c;
-  color: #eaeaea;
+  color: #333;
   margin: 0;
   padding: 0;
 }
@@ -72,7 +72,8 @@ table td {
   padding: 15px;
   margin: 10px;
   border-radius: 8px;
-  background-color: #2e2e2e;
+  /* background-color: #2e2e2e; */
+  background-color: rgba(255, 255, 255, 0.141);
   border: 2px solid #444;
   color: #eee;
   text-align: center;
@@ -80,7 +81,7 @@ table td {
   transition: background-color 0.3s, transform 0.3s;
 }
 .product-card:hover {
-  background-color: #3a3a3a;
+  background-color: rgba(255, 255, 255, 0.2);
   transform: scale(1.05);
 }
 .product-card img {
@@ -211,7 +212,9 @@ hr {
 .alert-list {
   width: 50%;
   margin: 20px auto;
-  background-color: #2f2f2f;
+  /* background-color: #2f2f2f; */
+    background-color: rgba(255, 255, 255, 0.091);
+
   border: 2px solid #444;
   border-radius: 8px;
   padding: 15px;
@@ -255,7 +258,9 @@ hr {
   width: 90%;
   margin: 30px auto;
   padding: 20px;
-  background-color: #2b2b2b;
+  /* background-color: #2b2b2b; */
+    background-color: rgba(255, 255, 255, 0.083);
+
   border: 2px solid #444;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.5);
@@ -264,6 +269,7 @@ hr {
 .profit-table {
   width: 100%;
   border-collapse: collapse;
+  border-radius: 10px;
 }
 
 .profit-table th, .profit-table td {
@@ -304,7 +310,8 @@ hr {
   width: 90%;
   margin: 30px auto;
   padding: 20px;
-  background-color: #2b2b2b;
+  /* background-color: #2b2b2b; */
+  background-color: rgba(255, 255, 255, 0.141);
   border: 2px solid #444;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.5);
@@ -379,12 +386,15 @@ hr {
   display: flex;
   gap: 30px;
   padding: 30px;
-  background-color: #1d1d1d;
+  /* background-color: #1d1d1d; */
+    background-color: rgba(0, 0, 0, 0.141);
+
 }
 
 .docs-sidebar {
   width: 230px;
-  background-color: #2c2c2c;
+  /* background-color: #2c2c2c; */
+    background-color: rgba(255, 255, 255, 0.072);
   border: 2px solid #444;
   border-radius: 8px;
   padding: 20px;
@@ -417,7 +427,9 @@ hr {
 
 .docs-content {
   flex: 1;
-  background-color: #2b2b2b;
+  /* background-color: #2b2b2b; */
+      background-color: rgba(255, 255, 255, 0.072);
+
   border: 2px solid #444;
   border-radius: 8px;
   padding: 20px;
@@ -474,7 +486,8 @@ hr {
 }
 
 .footer {
-  background-color: #1e1e1e;
+  /* background-color: #1e1e1e; */
+  background-color: rgba(0,0,0, 0.1);
   color: #ccc;
   padding: 30px 20px;
   border-top: 2px solid #333;
@@ -761,25 +774,6 @@ hr {
 } */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   .nav {
   background-color: #2c2c2c;
   padding: 10px 20px;
@@ -856,3 +850,126 @@ hr {
   border: 1px solid #ccc;
   border-radius: 8px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+main, .content, .wrapper, body {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* CSS أساسي */
+.animated-background {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  overflow: hidden;
+  z-index: -1; /* خلف كل شي */
+}
+
+/* كرات */
+.ball {
+  position: absolute;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  opacity: 0.3;
+  background: radial-gradient(circle, rgba(255,255,255,0.6), transparent);
+  animation: floatBall 15s infinite ease-in-out;
+}
+
+/* كل كرة لها موقع أولي مختلف */
+.ball:nth-child(1) { top: 10%; left: 20%; background-color: #FF6F61; }
+.ball:nth-child(2) { top: 30%; left: 60%; background-color: #006D5B; }
+.ball:nth-child(3) { top: 50%; left: 10%; background-color: #FF6F61; }
+.ball:nth-child(4) { top: 80%; left: 70%; background-color: #006D5B; }
+.ball:nth-child(5) { top: 40%; left: 40%; background-color: #FF6F61; }
+.ball:nth-child(6) { top: 20%; left: 85%; background-color: #006D5B; }
+
+/* حركة عشوائية */
+@keyframes floatBall {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(50px, -30px) scale(1.1); }
+  50% { transform: translate(-60px, 40px) scale(0.9); }
+  75% { transform: translate(30px, -50px) scale(1.05); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+/* طبقة Blur فوق الكرات */
+.blur-overlay {
+  position: absolute;
+  width: 100%; height: 100%;
+  backdrop-filter: blur(5px);
+}
+
+
+
