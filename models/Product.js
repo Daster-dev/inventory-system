@@ -9,7 +9,8 @@ const productSchema = new mongoose.Schema({
   qty: Number,
   expiryDate: String,
   imgPath: String,
-  lastSold: Date
+  lastSold: Date,
+  barcode: String
 });
 
 module.exports = mongoose.model('Product', productSchema);

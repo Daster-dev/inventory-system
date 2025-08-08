@@ -90,7 +90,7 @@ app.post('/products/delete/:id', async (req, res, next) => {
 
 app.post('/products/add', async (req, res, next) => {
   try {
-    const { name, category, priceIn, priceOut, qty, expiryDate } = req.body;
+    const { name, category, priceIn, priceOut, qty, expiryDate, barcode } = req.body;
     let imgPath = '';
 
     if (req.files && req.files.img) {
@@ -121,7 +121,8 @@ app.post('/products/add', async (req, res, next) => {
         qty:       +qty,
         expiryDate,
         imgPath,
-        lastSold:  null
+        lastSold:  null,
+		barclde
       });
       await product.save();
     }
