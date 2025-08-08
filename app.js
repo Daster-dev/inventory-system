@@ -139,6 +139,7 @@ app.post('/products/add', upload.single('img'), async (req, res, next) => {
 
 
 
+
 //? 2) عملية البيع السريع
 app.post('/sales/quick', async (req, res, next) => {
   try {
