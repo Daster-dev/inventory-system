@@ -103,7 +103,7 @@ app.post('/products/add', async (req, res, next) => {
       qty,
       expiryDate,
       barcode,
-      imgBase64
+      imgPath
     } = req.body;
 
 	
