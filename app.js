@@ -14,7 +14,8 @@ const PORT = 3000;
 
 
 //* ضبط Express
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({limit : '10mb'}));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(fileUpload());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
