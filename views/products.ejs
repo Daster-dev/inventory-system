@@ -74,9 +74,8 @@
 </small>
 <form id="searchForm" style="margin: 15px 0;">
   <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." style="padding: 8px; width: 250px;">
-  <button><a herf="/barcode-search">البحث باستخدام الباركود</a></button>
 </form>
-
+  <button><a herf="/barcode-search">البحث باستخدام الباركود</a></button>
 <select id="filterCategory">
   <option value="" <%= !category ? 'selected' : '' %>>كل الأقسام</option>
   <% categories.forEach(c => { %>

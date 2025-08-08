@@ -9,18 +9,41 @@
   <h2>🔍 بحث باستخدام الباركود</h2>
 
   <button onclick="startScanner()">📷 امسح الباركود</button>
-  <button onclick="restartScanner()">🔄 إعادة المسح</button>
+
   <div id="scanner"></div>
 
   <% if (product) { %>
-    <div class="product">
-      <h3><%= product.name %></h3>
-      <p>السعر: <%= product.priceOut %> دينار</p>
-      <p>الباركود: <%= product.barcode %></p>
-	    <button class="sell-btn" data-id="<%= product.id %>">تم البيع</button>
-    </div>
+  
+      <div class="product-card 
+  <% if (product.qty === 0) { %> out <% } 
+     else if (product.qty < 5) { %> low <% } 
+     else { %> ok <% } %>" data-name="<%= product.name.toLowerCase() %>">
+  <% if (product.imgPath) { %>
+    <img src="<%= product.imgPath %>" alt="<%= product.name %>" id="imgClick">
+  <% } %>
+  <h3><%= product.name %></h3>
+  <p>القسم: <strong><%= product.category %></strong></p>
+  <p>الكمية: <%= product.qty %></p>
+
+  <button class="sell-btn" data-id="<%= product.id %>">تم البيع</button>
+
+  <form action="/products/delete/<%= product.id %>" method="POST" style="margin-top:5px;" onsubmit="return confirm('⚠️ هل أنت متأكد من حذف المنتج؟');">
+    <button type="submit" class="del-btn" style="background:#c00; color:#fff;">🗑 حذف المنتج</button>
+  </form>
+
+
+</div>
+	
   <% } %>
 
+  
+  
+  
+  
+  
+  
+  
+  
   <script>
     let scanner;
     function startScanner() {
