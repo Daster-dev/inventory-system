@@ -88,13 +88,13 @@ app.post('/products/delete/:id', async (req, res, next) => {
 
 
 
-const multer = require('multer');
-const storage = multer.memoryStorage(); // يخزن الصورة بالذاكرة
-const upload = multer({ storage: storage });
+//const multer = require('multer');
+//const storage = multer.memoryStorage(); // يخزن الصورة بالذاكرة
+//const upload = multer({ storage: storage });
+//upload.single('img'),
 
 
-
-app.post('/products/add', upload.single('img'), async (req, res, next) => {
+app.post('/products/add',  async (req, res, next) => {
   try {
     const { name, category, priceIn, priceOut, qty, expiryDate, barcode } = req.body;
     let imgBase64 = '';
