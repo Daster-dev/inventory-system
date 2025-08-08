@@ -61,17 +61,6 @@
         }
       );
     }
-
-    function restartScanner() {
-      if (scanner) {
-        scanner.stop().then(() => {
-          document.getElementById("scanner").innerHTML = "";
-          startScanner();
-        });
-      } else {
-        startScanner();
-      }
-    }
   </script>
   
   

@@ -75,9 +75,10 @@
 <form id="searchForm" style="margin: 15px 0;">
   <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." style="padding: 8px; width: 250px;">
 </form>
-  <form action="/barcode-search/" method="GET" style="margin-top:5px;">
-    <button type="submit" class="btn" style="background:#00c; color:#fff;">البحث باستخدام الباركود</button>
-  </form>
+
+  	    <button type="button" onclick="startScanner2()">📷 امسح الباركود</button>
+        <div id="scanner2" style="width:300px; display:none;"></div>
+  
   <br>
 <select id="filterCategory">
   <option value="" <%= !category ? 'selected' : '' %>>كل الأقسام</option>
@@ -93,7 +94,7 @@
     <div class="product-card 
   <% if (p.qty === 0) { %> out <% } 
      else if (p.qty < 5) { %> low <% } 
-     else { %> ok <% } %>" data-name="<%= p.name.toLowerCase() %>">
+     else { %> ok <% } %>" data-name="<%= p.name.toLowerCase() %>" data-barcode="<%= p.barcode.toLowerCase() %>">
   <% if (p.imgPath) { %>
     <img src="<%= p.imgPath %>" alt="<%= p.name %>" id="imgClick">
   <% } %>
@@ -129,6 +130,23 @@
         scanner.stop();
         document.getElementById("barcodeInput").value = decodedText;
         document.getElementById("scanner").style.display = "none";
+      },
+      (errorMessage) => {
+        console.warn("خطأ بالقراءة:", errorMessage);
+      }
+    );
+  }
+  
+  function startScanner2() {
+    document.getElementById("scanner2").style.display = "block";
+    const scanner = new Html5Qrcode("scanner");
+    scanner.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: 250 },
+      (decodedText) => {
+        scanner.stop();
+        document.getElementById("searchInput").value = decodedText;
+        document.getElementById("scanner2").style.display = "none";
       },
       (errorMessage) => {
         console.warn("خطأ بالقراءة:", errorMessage);

@@ -40,8 +40,11 @@ if (searchInput) {
   searchInput.addEventListener('input', () => {
     const keyword = searchInput.value.toLowerCase();
     document.querySelectorAll('.product-card').forEach(card => {
-      const name = card.dataset.name || '';
-      card.style.display = name.includes(keyword) ? 'inline-block' : 'none';
+      const name = (card.dataset.name || '').toLowerCase();
+	  const barcode = (card.dataset.barcode || '').toLowerCase();
+	  
+	  const matches = name.includes(keyword) || barcode.includes(keyword);
+      card.style.display = matches ? 'inline-block' : 'none';
     });
   });
 }
