@@ -102,9 +102,12 @@
   <% } else { %>
   <p>📷 لا توجد صورة</p>
 <% } %>
+<textarea style="width:100%; height:100px;"><%= p.imgPath %></textarea>
+
   <h3><%= p.name %></h3>
   <pre><%= p.imgPath.slice(0, 100) %></pre>
 
+<textarea style="width:100%; height:100px;"><%= p.imgPath %></textarea>
 
   <p>القسم: <strong><%= p.category %></strong></p>
   <p>الكمية: <%= p.qty %></p>
