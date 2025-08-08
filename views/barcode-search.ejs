@@ -13,8 +13,8 @@
   <div id="scanner"></div>
 
   <% if (product) { %>
-  
-      <div class="product-card 
+
+      <div class="product-card product
   <% if (product.qty === 0) { %> out <% } 
      else if (product.qty < 5) { %> low <% } 
      else { %> ok <% } %>" data-name="<%= product.name.toLowerCase() %>">
