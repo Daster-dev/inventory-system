@@ -461,14 +461,22 @@ app.get('/help', (req, res) => {
 
 //! 7) صفحة الباركود 
 
-app.get('/barcode-search', (req, res) => {
-  res.render('barcode-search', { product: null });
+app.get('/barcode-search', (req, res, next) => {
+	try {
+  res.render('barcode-search', { product: null, activePage: "products" });
+   } catch (error) {
+   	next(error)
+   }
 });
 
-app.get('/barcode-result', async (req, res) => {
+app.get('/barcode-result', async (req, res, next) => {
+	try {
   const barcode = req.query.code;
   const product = await Product.findOne({ barcode });
-  res.render('barcode-search', { product });
+  res.render('barcode-search', { product, activePage: "products" });
+} catch (err) {
+	next(err)
+}
 });
 
 
