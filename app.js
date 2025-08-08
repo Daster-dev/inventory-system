@@ -93,16 +93,15 @@ const storage = multer.memoryStorage(); // يخزن الصورة بالذاكر�
 const upload = multer({ storage: storage });
 
 
-app.post('/products/add', async (req, res, next) => {
+app.post('/products/add', upload.single('img'), async (req, res, next) => {
   try {
     const { name, category, priceIn, priceOut, qty, expiryDate, barcode } = req.body;
     let imgBase64 = '';
 
     // تحويل الصورة إلى Base64 إذا موجودة
-    if (req.files && req.files.img) {
-      const file = req.files.img;
-      const mimeType = file.mimetype || 'image/jpeg'; // نوع الصورة
-      const base64Data = file.data.toString('base64');
+    if (req.file) {
+      const mimeType = req.file.mimetype || 'image/jpeg';
+      const base64Data = req.file.buffer.toString('base64');
       imgBase64 = `data:${mimeType};base64,${base64Data}`;
     }
 
@@ -137,6 +136,7 @@ app.post('/products/add', async (req, res, next) => {
     next(err);
   }
 });
+
 
 
 //? 2) عملية البيع السريع
