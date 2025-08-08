@@ -42,7 +42,7 @@
       <label>صورة المنتج:</label>
 
 	<input type="file" id="imgInput" accept="image/*" required>
-  <input type="hidden" name="imgBase64" id="imgBase64">
+  <input type="hidden" name="imgPath" id="imgPath">
 ج
     </div>
 	
@@ -177,7 +177,7 @@ document.getElementById('productForm').addEventListener('submit', async function
   event.preventDefault();
 
   const fileInput = document.getElementById('imgInput');
-  const base64Input = document.getElementById('imgBase64');
+  const base64Input = document.getElementById('imgPath');
   const form = event.target;
 
   if (fileInput.files.length === 0) return form.submit(); // ماكو صورة
@@ -204,6 +204,40 @@ function toBase64(file) {
     reader.readAsDataURL(file); // يحوّل الصورة مباشرة إلى Base64
   });
 }
+</script>
+<script>
+document.getElementById('productForm').addEventListener('submit', async function (event) {
+  event.preventDefault();
+
+  const fileInput = document.getElementById('imgInput');
+  const imgPathInput = document.getElementById('imgPath');
+  const form = event.target;
+
+  const file = fileInput.files[0];
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', 'ml_default'); // اختياري
+  formData.append('publicKey', 'public_GvPxhVqMH6xA5PdJJkO/OIxaDIs='); // استبدلها بمفتاحك
+  formData.append('fileName', file.name);
+
+  try {
+    const res = await fetch('https://upload.imagekit.io/api/v1/files/upload', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Basic ' + btoa('public_GvPxhVqMH6xA5PdJJkO/OIxaDIs=')
+      },
+      body: formData
+    });
+
+    const data = await res.json();
+    imgPathInput.value = data.url; // رابط الصورة
+
+    form.submit();
+  } catch (error) {
+    alert('فشل رفع الصورة');
+    console.error(error);
+  }
+});
 </script>
 
 

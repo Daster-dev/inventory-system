@@ -31,6 +31,10 @@ mongoose.connect('mongodb+srv://Daster:Ali12345@mhsbt.glgwf98.mongodb.net/?retry
 });
 
 
+
+
+
+
 //! project functions
 //* ضبط اللغة العربية
 function reverseArabic(text) {
@@ -89,23 +93,29 @@ app.post('/products/delete/:id', async (req, res, next) => {
 
 
 
-//const multer = require('multer');
-//const storage = multer.memoryStorage(); // يخزن الصورة بالذاكرة
-//const upload = multer({ storage: storage });
-//upload.single('img'),
-
 app.post('/products/add', async (req, res, next) => {
   try {
-    const { name, category, priceIn, priceOut, qty, expiryDate, barcode, imgBase64 } = req.body;
+    const {
+      name,
+      category,
+      priceIn,
+      priceOut,
+      qty,
+      expiryDate,
+      barcode,
+      imgBase64
+    } = req.body;
+
+	
 
     let product = await Product.findOne({ name, category });
 
     if (product) {
-      product.qty        += +qty;
+      product.qty += +qty;
       if (priceIn)        product.priceIn    = +priceIn;
       if (priceOut)       product.priceOut   = +priceOut;
       if (expiryDate)     product.expiryDate = expiryDate;
-      if (imgBase64)      product.imgPath    = imgBase64;
+      if (imageUrl)       product.imgPath    = imageUrl;
 
       await product.save();
     } else {
@@ -117,7 +127,7 @@ app.post('/products/add', async (req, res, next) => {
         priceOut:   +priceOut,
         qty:        +qty,
         expiryDate,
-        imgPath:    imgBase64,
+        imgPath, // رابط مباشر للصورة
         lastSold:   null,
         barcode
       });
@@ -129,6 +139,9 @@ app.post('/products/add', async (req, res, next) => {
     next(err);
   }
 });
+
+
+
 
 
 
