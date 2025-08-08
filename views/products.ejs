@@ -145,7 +145,12 @@
       { fps: 10, qrbox: 250 },
       (decodedText) => {
         scanner.stop();
-        document.getElementById("searchInput").value = decodedText;
+		const searchInput = document.getElementById("searchInput");
+        searchInput.value = decodedText;
+		
+		
+		    const event = new Event('input', { bubbles: true });
+            searchInput.dispatchEvent(event);
         document.getElementById("scanner2").style.display = "none";
       },
       (errorMessage) => {
