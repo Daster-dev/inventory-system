@@ -229,20 +229,18 @@ document.getElementById('productForm').addEventListener('submit', async function
     });
 
     const data = await res.json();
-    imgPathInput.value = data.url; // رابط الصورة
-
-    form.submit();
 	
 	if (res.ok && data.url) {
     imgPathInput.value = data.url;
     form.submit();
   } else {
     console.error('❌ استجابة غير متوقعة من ImageKit:', data);
-    alert('فشل رفع الصورة: تحقق من المفتاح أو الملف');
+    alert('1فشل رفع الصورة: تحقق من المفتاح أو الملف');
   }
   } catch (error) {
     console.error('❌ خطأ أثناء الاتصال بـ ImageKit:', error);
   alert('فشل رفع الصورة: تحقق من الاتصال أو الملف');
+
   }
 });
 </script>
