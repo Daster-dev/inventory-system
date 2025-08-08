@@ -169,9 +169,44 @@
     );
   }
   
+  function prepareImage(event) {
+  event.preventDefault();
+
+  const fileInput = document.getElementById('imgInput');
+  const hiddenInput = document.getElementById('imgBase64');
+  const form = document.getElementById('productForm');
+
+  if (fileInput.files.length > 0) {
+    const imgFile = fileInput.files[0];
+    const img = new Image();
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      img.onload = function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+
+        // اختار الصيغة هنا: 'image/webp' أو 'image/png'
+        hiddenInput.value = canvas.toDataURL('image/webp', 0.9); // جودة عالية
+        form.submit();
+      };
+      img.src = e.target.result;
+    };
+
+    reader.readAsDataURL(imgFile);
+  } else {
+    form.submit(); // بدون صورة
+  }
+
+  return false;
+}
+
   
-  
-    function prepareImage() {
+    function prepareImage6() {
     const fileInput = document.getElementById('imgInput');
     const hiddenInput = document.getElementById('imgBase64');
 
