@@ -103,6 +103,10 @@
   <p>الكمية: <%= p.qty %></p>
 
   <button class="sell-btn" data-id="<%= p.id %>">تم البيع</button>
+<form action="/return-product" method="POST" style="display:inline;">
+  <input type="hidden" name="productId" value="<%= p.id %>">
+  <button type="submit">↩️ إرجاع المنتج</button>
+</form>
 
   <form action="/products/delete/<%= p.id %>" method="POST" style="margin-top:5px;" onsubmit="return confirm('⚠️ هل أنت متأكد من حذف المنتج؟');">
     <button type="submit" class="del-btn" style="background:#c00; color:#fff;">🗑 حذف المنتج</button>

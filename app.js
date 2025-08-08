@@ -50,9 +50,6 @@ app.locals.projectIMG = config.projectIMG
 */
 
 
-app.get('/hello', (req, res) => {
-  res.render('index', { activePage: 'home' });  
-});
 
 
 
@@ -295,9 +292,7 @@ app.get('/notifications', async (req, res, next) => {
     const threshold  = new Date(now.getTime() - limitDays * 24 * 60 * 60 * 1000);
 
     const products = await Product.find().lean();
-
     const lowStock = products.filter(p => p.qty < 5);
-
     const inactive = products.filter(p => {
       return !p.lastSold 
           || new Date(p.lastSold) <= threshold;
@@ -459,25 +454,35 @@ app.get('/help', (req, res) => {
 
 
 
-//! 7) صفحة الباركود 
 
-app.get('/barcode-search', (req, res, next) => {
-	try {
-  res.render('barcode-search', { product: null, activePage: "products" });
-   } catch (error) {
-   	next(error)
-   }
+
+
+
+
+
+app.post('/return-product', async (req, res) => {
+  try {
+    const { productId } = req.body;
+    const product = await Product.findById(productId);
+
+    if (!product) return res.status(404).send('المنتج غير موجود');
+
+    // تعديل الكمية (مثلاً زيادة 1)
+    product.qty += 1;
+    await product.save();
+
+	
+
+    res.redirect('/products');
+  } catch (err) {
+    console.error('خطأ في الإرجاع:', err);
+    res.status(500).send('فشل في إرجاع المنتج');
+  }
 });
 
-app.get('/barcode-result', async (req, res, next) => {
-	try {
-  const barcode = req.query.code;
-  const product = await Product.findOne({ barcode });
-  res.render('barcode-search', { product, activePage: "products" });
-} catch (err) {
-	next(err)
-}
-});
+
+
+
 
 
 app.listen(PORT, () => {

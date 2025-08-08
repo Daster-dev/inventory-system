@@ -559,7 +559,11 @@ hr {
 
 
 
-
+ #scanner, #scanner2{ 
+	 width: 300px; 
+	 margin: 20px auto; 
+	 display: none; 
+ }
 
 
 
