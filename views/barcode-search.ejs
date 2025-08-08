@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>بحث بالباركود</title>
+<%- include('partials/header') %>
   <script src="https://unpkg.com/html5-qrcode"></script>
   <style>
     #scanner { width: 300px; margin: 20px auto; display: none; }
     .product { border: 1px solid #ccc; padding: 10px; margin: 10px; }
     button { margin: 10px; padding: 10px; font-size: 16px; }
   </style>
-</head>
-<body>
+  
   <h2>🔍 بحث باستخدام الباركود</h2>
 
   <button onclick="startScanner()">📷 امسح الباركود</button>
@@ -55,5 +50,8 @@
       }
     }
   </script>
-</body>
-</html>
+  
+  
+  
+  
+  <%- include('partials/footer') %>
