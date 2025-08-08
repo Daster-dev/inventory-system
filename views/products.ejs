@@ -98,11 +98,10 @@
      else if (p.qty < 5) { %> low <% } 
      else { %> ok <% } %>" data-name="<%= p.name.toLowerCase() || '' %>" data-barcode="<%= p.barcode || '' %>">
 <% if (p.imgPath && p.imgPath.startsWith('data:image')) { %>
-    <img src="<%= p.imgPath %>" alt="<%= p.name %>" id="imgClick">
+    <img src="<%- p.imgPath %>" alt="<%= p.name %>" id="imgClick">
   <% } else { %>
   <p>📷 لا توجد صورة</p>
 <% } %>
-<textarea style="width:100%; height:100px;"><%= p.imgPath %></textarea>
 
   <h3><%= p.name %></h3>
   <pre><%= p.imgPath.slice(0, 100) %></pre>
