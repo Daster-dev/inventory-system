@@ -76,6 +76,9 @@
   <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج..." style="padding: 8px; width: 250px;">
 </form>
   <button><a herf="/barcode-search">البحث باستخدام الباركود</a></button>
+  <form action="/barcode-search/" method="GET" style="margin-top:5px;">
+    <button type="submit" class="btn" style="background:#00c; color:#fff;">البحث باستخدام الباركود</button>
+  </form>
   <br>
 <select id="filterCategory">
   <option value="" <%= !category ? 'selected' : '' %>>كل الأقسام</option>
