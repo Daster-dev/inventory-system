@@ -94,7 +94,7 @@
     <div class="product-card 
   <% if (p.qty === 0) { %> out <% } 
      else if (p.qty < 5) { %> low <% } 
-     else { %> ok <% } %>" data-name="<%= p.name.toLowerCase() || '' %>" data-barcode="<%= p.barcode.toLowerCase() %>">
+     else { %> ok <% } %>" data-name="<%= p.name.toLowerCase() || '' %>" data-barcode="<%= p.barcode.toLowerCase() || '' %>">
   <% if (p.imgPath) { %>
     <img src="<%= p.imgPath %>" alt="<%= p.name %>" id="imgClick">
   <% } %>
