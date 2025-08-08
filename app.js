@@ -93,6 +93,7 @@ const storage = multer.memoryStorage(); // يخزن الصورة بالذاكر�
 const upload = multer({ storage: storage });
 
 
+
 app.post('/products/add', upload.single('img'), async (req, res, next) => {
   try {
     const { name, category, priceIn, priceOut, qty, expiryDate, barcode } = req.body;
