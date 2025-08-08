@@ -463,7 +463,7 @@ app.get('/help', (req, res) => {
 app.post('/return-product', async (req, res) => {
   try {
     const { productId } = req.body;
-    const product = await Product.findById(productId);
+    const product = await Product.findOne({ id: productId});
 
     if (!product) return res.status(404).send('المنتج غير موجود');
 
