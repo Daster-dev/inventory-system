@@ -85,27 +85,35 @@ app.post('/products/delete/:id', async (req, res, next) => {
   }
 });
 
+
+
+
+const multer = require('multer');
+const storage = multer.memoryStorage(); // يخزن الصورة بالذاكرة
+const upload = multer({ storage: storage });
+
+
 app.post('/products/add', async (req, res, next) => {
   try {
     const { name, category, priceIn, priceOut, qty, expiryDate, barcode } = req.body;
-    let imgPath = '';
+    let imgBase64 = '';
 
+    // تحويل الصورة إلى Base64 إذا موجودة
     if (req.files && req.files.img) {
-      const file     = req.files.img;
-      const fileName = `${Date.now()}_${file.name}`;
-      const uploadPath = path.join(__dirname, 'public', 'uploads', fileName);
-      await file.mv(uploadPath);
-      imgPath = `/uploads/${fileName}`;
+      const file = req.files.img;
+      const mimeType = file.mimetype || 'image/jpeg'; // نوع الصورة
+      const base64Data = file.data.toString('base64');
+      imgBase64 = `data:${mimeType};base64,${base64Data}`;
     }
 
     let product = await Product.findOne({ name, category });
 
     if (product) {
-      product.qty      += +qty;
-      if (priceIn)      product.priceIn   = +priceIn;
-      if (priceOut)     product.priceOut  = +priceOut;
-      if (expiryDate)   product.expiryDate = expiryDate;
-      if (imgPath)      product.imgPath   = imgPath;
+      product.qty        += +qty;
+      if (priceIn)        product.priceIn    = +priceIn;
+      if (priceOut)       product.priceOut   = +priceOut;
+      if (expiryDate)     product.expiryDate = expiryDate;
+      if (imgBase64)      product.imgPath    = imgBase64;
 
       await product.save();
     } else {
@@ -113,13 +121,13 @@ app.post('/products/add', async (req, res, next) => {
         id:         generateId(),
         name,
         category,
-        priceIn:   +priceIn,
-        priceOut:  +priceOut,
-        qty:       +qty,
+        priceIn:    +priceIn,
+        priceOut:   +priceOut,
+        qty:        +qty,
         expiryDate,
-        imgPath,
-        lastSold:  null,
-		barcode
+        imgPath:    imgBase64,
+        lastSold:   null,
+        barcode
       });
       await product.save();
     }
@@ -129,6 +137,7 @@ app.post('/products/add', async (req, res, next) => {
     next(err);
   }
 });
+
 
 //? 2) عملية البيع السريع
 app.post('/sales/quick', async (req, res, next) => {
@@ -450,16 +459,6 @@ app.get('/help', (req, res) => {
   res.render('help', { activePage: 'help' });
 });
 
-
-
-
-
-
-
-
-
-
-
 app.post('/return-product', async (req, res) => {
   try {
     const { productId } = req.body;
@@ -479,6 +478,15 @@ app.post('/return-product', async (req, res) => {
     res.status(500).send('فشل في إرجاع المنتج');
   }
 });
+
+
+
+
+
+
+
+
+
 
 
 
