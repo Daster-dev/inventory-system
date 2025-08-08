@@ -455,6 +455,22 @@ app.get('/help', (req, res) => {
 });
 
 
+
+
+
+//! 7) صفحة الباركود 
+
+app.get('/barcode-search', (req, res) => {
+  res.render('barcode-search', { product: null });
+});
+
+app.get('/barcode-result', async (req, res) => {
+  const barcode = req.query.code;
+  const product = await Product.findOne({ barcode });
+  res.render('barcode-search', { product });
+});
+
+
 app.listen(PORT, () => {
   console.log(`Running at http://localhost:${PORT}`);
 });
