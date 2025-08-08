@@ -94,7 +94,7 @@
     <div class="product-card 
   <% if (p.qty === 0) { %> out <% } 
      else if (p.qty < 5) { %> low <% } 
-     else { %> ok <% } %>" data-name="<%= p.name.toLowerCase() %>" data-barcode="<%= p.barcode.toLowerCase() %>">
+     else { %> ok <% } %>" data-name="<%= p.name.toLowerCase() || '' %>" data-barcode="<%= p.barcode.toLowerCase() %>">
   <% if (p.imgPath) { %>
     <img src="<%= p.imgPath %>" alt="<%= p.name %>" id="imgClick">
   <% } %>
@@ -139,7 +139,7 @@
   
   function startScanner2() {
     document.getElementById("scanner2").style.display = "block";
-    const scanner = new Html5Qrcode("scanner");
+    const scanner = new Html5Qrcode("scanner2");
     scanner.start(
       { facingMode: "environment" },
       { fps: 10, qrbox: 250 },
