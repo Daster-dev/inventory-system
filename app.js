@@ -122,7 +122,7 @@ app.post('/products/add', async (req, res, next) => {
         expiryDate,
         imgPath,
         lastSold:  null,
-		barclde
+		barcode
       });
       await product.save();
     }
