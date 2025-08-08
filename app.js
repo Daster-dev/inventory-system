@@ -93,18 +93,9 @@ app.post('/products/delete/:id', async (req, res, next) => {
 //const upload = multer({ storage: storage });
 //upload.single('img'),
 
-
-app.post('/products/add',  async (req, res, next) => {
+app.post('/products/add', async (req, res, next) => {
   try {
-    const { name, category, priceIn, priceOut, qty, expiryDate, barcode } = req.body;
-    let imgBase64 = '';
-
-    // تحويل الصورة إلى Base64 إذا موجودة
-    if (req.file) {
-      const mimeType = req.file.mimetype || 'image/jpeg';
-      const base64Data = req.file.buffer.toString('base64');
-      imgBase64 = `data:${mimeType};base64,${base64Data}`;
-    }
+    const { name, category, priceIn, priceOut, qty, expiryDate, barcode, imgBase64 } = req.body;
 
     let product = await Product.findOne({ name, category });
 
@@ -137,6 +128,7 @@ app.post('/products/add',  async (req, res, next) => {
     next(err);
   }
 });
+
 
 
 

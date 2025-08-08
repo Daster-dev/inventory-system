@@ -40,7 +40,9 @@
 
     <div class="form-row i">
       <label>صورة المنتج:</label>
-      <input type="file" name="img">
+
+	  <input type="file" id="imgInput" accept="image/*">
+      <input type="hidden" name="imgBase64" id="imgBase64">
     </div>
 	
 	
@@ -161,6 +163,23 @@
         console.warn("خطأ بالقراءة:", errorMessage);
       }
     );
+  }
+  
+  
+  
+    function prepareImage() {
+    const fileInput = document.getElementById('imgInput');
+    const hiddenInput = document.getElementById('imgBase64');
+
+    if (fileInput.files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        hiddenInput.value = e.target.result; // Base64 string
+        document.forms[0].submit(); // إرسال النموذج بعد تجهيز الصورة
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+      event.preventDefault(); // نوقف الإرسال لحين تجهيز الصورة
+    }
   }
 </script>
 
