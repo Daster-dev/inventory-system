@@ -123,23 +123,24 @@
 
   <label>📛 الاسم:</label>
   <input type="text" id="popName" class="pop-input">
-
+<br>
   <label>📦 الفئة:</label>
   <input type="text" id="popCategory" class="pop-input">
-
+<br>
   <label>💰 سعر الشراء:</label>
   <input type="number" id="popPriceIn" class="pop-input">
-
+<br>
   <label>💸 سعر البيع:</label>
   <input type="number" id="popPriceOut" class="pop-input">
-
+<br>
   <label>📊 الكمية:</label>
   <input type="number" id="popQty" class="pop-input">
-
+<br>
   <label>📅 تاريخ الانتهاء:</label>
   <input type="date" id="popExpiry" class="pop-input">
-
+<br>
   <p>🕒 آخر بيع: <span id="popLastSold"></span></p>
+  <br>
   <p>🔢 الباركود: <span id="popBarcode"></span></p>
 
   <button onclick="saveProduct()" style="margin-top:10px;">💾 حفظ التعديلات</button>
@@ -179,7 +180,7 @@
     data-qty="<%= p.qty %>"
     data-expiry="<%= p.expiryDate %>"
     data-barcode="<%= p.barcode %>"
-    data-lastsold="<%= p.lastSold ? p.lastSold.toLocaleDateString() : '—' %>
+    data-lastsold="<%= p.lastSold ? p.lastSold.toLocaleDateString() : '—' %>"
 	data-id="<%= p.id %>"
     data-img="<%= p.imgPath %>">
     📄 تفاصيل المنتج
