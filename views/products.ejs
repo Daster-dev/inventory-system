@@ -210,7 +210,7 @@
         scanner.stop();
         document.getElementById("barcodeInput").value = decodedText;
         document.getElementById("scanner").style.display = "none";
-		document.getElementById("scannerBTN").textContant = "تم مسح الكود، اعادة ؟";
+		document.getElementById("scannerBTN").innerHTML = "تم مسح الكود، اعادة ؟";
    		document.getElementById("closeBTN").style.display = "none";
       },
       (errorMessage) => {
