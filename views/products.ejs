@@ -139,15 +139,14 @@
 <br>
   <label>📅 تاريخ الانتهاء:</label>
   <input type="date" id="popExpiry" class="pop-input">
-<br>
   <p>🕒 آخر بيع: <span id="popLastSold"></span></p>
   <p>🔢 الباركود: <span id="popBarcode"></span></p>
 
 
   
-  <form id="deleteForm" method="POST" action="">
+  <form id="deleteForm" method="POST" action="" onsubmit="return confirm('⚠️ هل أنت متأكد من حذف المنتج؟');">
   <button type="button" onclick="saveProduct()" style="margin-top:10px;">💾 حفظ التعديلات</button>
-     <button type="submit" style="color:#000; margin-top:10px;">🗑 حذف المنتج</button>
+     <button type="submit" style="color:#fff; margin-top:10px;">🗑 حذف المنتج</button>
   </form>
 </div>
 
@@ -189,10 +188,6 @@
     📄 تفاصيل المنتج
   </button>
 </form>
-
-  <form action="/products/delete/<%= p.id %>" method="POST" style="margin-top:5px;" onsubmit="return confirm('⚠️ هل أنت متأكد من حذف المنتج؟');">
-    <button type="submit" class="del-btn" style="background:#c00; color:#fff;">🗑 حذف المنتج</button>
-  </form>
 
 
 </div>
