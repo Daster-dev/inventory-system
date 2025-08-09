@@ -23,11 +23,15 @@
   </div>
   <% } %>
   
+  <% if(p.qty > 0) { %>
   <div class="alert-item" style="border-left-color:#ffc107;">
     <span class="alert-icon">⚠️</span>
     <div class="alert-text">الكمية منخفضة لمنتج "<%= p.name %>"</div>
     <span class="alert-date">المتبقي <%= p.qty %></span>
   </div>
+  <% } %>
+  
+  
   <% }) %>
 
   <% expired.forEach(p => { %>
