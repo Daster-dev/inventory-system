@@ -16,18 +16,14 @@ document.querySelectorAll('.sell-btn').forEach(btn => {
     })
     .then(r => r.json())
     .then(data => {
-        if (data.success) {
-          const show = confirm(data.message + '\n\nهل تريد عرض الفاتورة الآن؟');
-          if (show && data.receipt) {
-            location.href = data.receipt;
-          } else {
-            location.reload();
-          }
-        } else {
-          alert(data.message);
-        }
+  if (data.success) {
+    alert(data.message || 'تم بيع المنتج بنجاح');
+    location.reload();
+  } else {
+    alert(data.message || 'حدث خطأ أثناء العملية');
+  }
+})
 
-    });
 
   };
 });
