@@ -115,6 +115,7 @@
   width:90%;
   max-width:400px;
   box-shadow:0 0 10px rgba(0,0,0,0.2);
+  transition: opacity 0.3s ease;
 ">
   <button onclick="closePopout()" style="position:absolute; top:10px; right:10px;">❌</button>
   <h2>🛠 تعديل المنتج</h2>
@@ -140,13 +141,11 @@
   <input type="date" id="popExpiry" class="pop-input">
 <br>
   <p>🕒 آخر بيع: <span id="popLastSold"></span></p>
-  <br>
   <p>🔢 الباركود: <span id="popBarcode"></span></p>
 
   <button onclick="saveProduct()" style="margin-top:10px;">💾 حفظ التعديلات</button>
-  <a id="deleteLink" href="#" style="color:red; display:block; margin-top:10px;">🗑 حذف المنتج</a>
+  <button type="button"><a id="deleteLink" href="#" style="color:red; display:block; margin-top:10px;">🗑 حذف المنتج</a></button>
 </div>
-
 
 
 
