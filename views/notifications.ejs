@@ -15,6 +15,14 @@
        (expired && expired.length) || 
        (inactive && inactive.length)) { %>
   <% lowStock.forEach(p => { %>
+  <% if(p.qty === 0) { %>
+  <div class="alert-item" style="border-left-color:#ff0000;">
+  <span class="alert-icon">❌</span>
+    <div class="alert-text">الكمية منتهية لمنتج: "<%= p.name %>"</div>
+    <span class="alert-date"></span>
+  </div>
+  <% } %>
+  
   <div class="alert-item" style="border-left-color:#ffc107;">
     <span class="alert-icon">⚠️</span>
     <div class="alert-text">الكمية منخفضة لمنتج "<%= p.name %>"</div>
