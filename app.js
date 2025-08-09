@@ -162,11 +162,12 @@ app.post('/sales/quick', async (req, res, next) => {
    
     prod.qty     -= 1;
     prod.lastSold = new Date();
-    await prod.save();
+   if (prod.qty < 0) {
+     prod.qty = 0;
+   }
 
-    if (prod.qty === 0) {
-      await Product.deleteOne({ id: productId });
-    }
+   await prod.save();
+
 
     const saleCount = await Sale.countDocuments();
     const saleId    = (saleCount + 1).toString();
