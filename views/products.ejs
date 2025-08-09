@@ -48,7 +48,7 @@
 	<div class="form-row j">
       <label>الباركود:</label>
       <input type="text" name="barcode" id="barcodeInput" required style="display:none;">
-      <button type="button" onclick="startScanner()">📷 امسح الباركود</button>
+      <button type="button" onclick="startScanner()" id="scannerBTN">📷 امسح الباركود</button>
 	  <button type="button" style="display: none;" id="closeBTN">اغلاق الكاميرا</button>
         <div id="scanner" style="width:300px; display:none;"></div>
     </div>
@@ -210,6 +210,8 @@
         scanner.stop();
         document.getElementById("barcodeInput").value = decodedText;
         document.getElementById("scanner").style.display = "none";
+		document.getElementById("scannerBTN").textContant = "تم مسح الكود، اعادة ؟";
+   		document.getElementById("closeBTN").style.display = "none";
       },
       (errorMessage) => {
         console.warn("خطأ بالقراءة:", errorMessage);
@@ -240,6 +242,7 @@ document.getElementById('closeBTN').addEventListener('click', async () => {
 		    const event = new Event('input', { bubbles: true });
             searchInput.dispatchEvent(event);
         document.getElementById("scanner2").style.display = "none";
+		document.getElementById("closeBTN2").style.display = "none";
       },
       (errorMessage) => {
         console.warn("خطأ بالقراءة:", errorMessage);
