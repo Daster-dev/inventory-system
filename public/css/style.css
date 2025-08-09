@@ -372,13 +372,13 @@ hr {
   margin-left: auto;
   margin-right: auto;
 }
-.a, .b {
+.a, .b{
   grid-row: div 2; /* أول سطر يحتوي عنصرين */
 }
 .c, .d, .e{
   grid-row: div 3; /* أول سطر يحتوي عنصرين */
 }
-.h, .i{
+.h, .i, .j{
   grid-row: div 4; /* أول سطر يحتوي عنصرين */
 }
 

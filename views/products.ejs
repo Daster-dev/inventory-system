@@ -40,18 +40,16 @@
 
     <div class="form-row i">
       <label>صورة المنتج:</label>
-
-	<input type="file" id="imgInput" accept="image/*" required>
-  <input type="hidden" name="imgPath" id="imgPath">
-ج
+	  <input type="file" id="imgInput" accept="image/*" required>
+      <input type="hidden" name="imgPath" id="imgPath" display="none">
     </div>
 	
 	
 	<div class="form-row j">
       <label>الباركود:</label>
       <input type="text" name="barcode" id="barcodeInput" required>
-	    <button type="button" onclick="startScanner()">📷 امسح الباركود</button>
-	    <button type="button" style="display: none;" id="closeBTN">اغلاق الكاميرا</button>
+      <button type="button" onclick="startScanner()">📷 امسح الباركود</button>
+	  <button type="button" style="display: none;" id="closeBTN">اغلاق الكاميرا</button>
         <div id="scanner" style="width:300px; display:none;"></div>
     </div>
 	
