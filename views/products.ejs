@@ -51,7 +51,9 @@
       <label>الباركود:</label>
       <input type="text" name="barcode" id="barcodeInput" required>
 	    <button type="button" onclick="startScanner()">📷 امسح الباركود</button>
-        <div id="scanner" style="width:300px; display:none;"></div>
+        <div id="scanner" style="width:300px; display:none;">
+		   <button onClick="closeCam()">close</button>
+		</div>
     </div>
 	
     </div>
@@ -80,7 +82,9 @@
 </form>
 
   	    <button type="button" onclick="startScanner2()">📷 امسح الباركود</button>
-        <div id="scanner2" style="width:300px; display:none;"></div>
+        <div id="scanner2" style="width:300px; display:none;">
+		 <button onclick="closeCam2()"> close</button>
+		</div>
         <br>
 		<button id="showOutOnly" style="margin:10px;">📦 المنتجات المنتهية الكمية</button>
 <button id="showAll" style="margin:10px; display:none;">↩️ عرض جميع المنتجات</button>
@@ -137,6 +141,12 @@
 
 <script src="https://unpkg.com/html5-qrcode"></script>
 <script>
+function closeCam(){
+  document.getElementById("scanner").style.display = "none";
+}
+function closeCam2(){
+  document.getElementById("scanner2").style.display = "none";
+}
   function startScanner() {
     document.getElementById("scanner").style.display = "block";
     const scanner = new Html5Qrcode("scanner");
