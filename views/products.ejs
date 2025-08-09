@@ -51,7 +51,7 @@
       <label>الباركود:</label>
       <input type="text" name="barcode" id="barcodeInput" required>
 	    <button type="button" onclick="startScanner()">📷 امسح الباركود</button>
-	    <button type="button" style="display: none;" id="closeBTN">close</button>
+	    <button type="button" style="display: none;" id="closeBTN">اغلاق الكاميرا</button>
         <div id="scanner" style="width:300px; display:none;"></div>
     </div>
 	
@@ -81,7 +81,7 @@
 </form>
 
   	    <button type="button" onclick="startScanner2()">📷 امسح الباركود</button>
-		<button type="button" id="closeBTN2"> close</button>
+		<button type="button" id="closeBTN2"> اغلاق الكاميرا</button>
         <div id="scanner2" style="width:300px; display:none;"></div>
         <br>
 		<button id="showOutOnly" style="margin:10px;">📦 المنتجات المنتهية الكمية</button>
@@ -115,6 +115,7 @@
   <h3><%= p.name %></h3>
 
   <p>القسم: <strong><%= p.category %></strong></p>
+  <p>السعر: <%= p.priceOut %>
   <p>الكمية: <%= p.qty %></p>
 
   <button class="sell-btn" data-id="<%= p.id %>">تم البيع</button>
