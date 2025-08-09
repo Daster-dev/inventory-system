@@ -81,8 +81,9 @@
 
   	    <button type="button" onclick="startScanner2()">📷 امسح الباركود</button>
         <div id="scanner2" style="width:300px; display:none;"></div>
-  
-  <br>
+        <br>
+		<button id="showOutOfStock" style="margin:10px;">📦 المنتجات المنتهية</button>
+        <br>
 <select id="filterCategory">
   <option value="" <%= !category ? 'selected' : '' %>>كل الأقسام</option>
   <% categories.forEach(c => { %>
@@ -91,6 +92,11 @@
 </select>
 
 
+<div id="outOfStockView" style="display:none;">
+  <h2>📦 المنتجات المنتهية</h2>
+  <div id="outOfStockList"></div>
+  <button onclick="hideOutOfStock()">↩️ العودة للقائمة</button>
+</div>
 
 <div id="productList">
   <% products.forEach(p => { %>
@@ -242,6 +248,28 @@ document.getElementById('productForm').addEventListener('submit', async function
   }
 });
 </script>
+<script>
+document.getElementById('showOutOfStock').addEventListener('click', () => {
+  const allCards = document.querySelectorAll('.product-card');
+  const outList = document.getElementById('outOfStockList');
+  outList.innerHTML = '';
+
+  allCards.forEach(card => {
+    if (card.querySelector('.qty') && card.querySelector('.qty').textContent.trim() === '0') {
+      outList.appendChild(card.cloneNode(true));
+    }
+  });
+
+  document.getElementById('productList').style.display = 'none';
+  document.getElementById('outOfStockView').style.display = 'block';
+});
+
+function hideOutOfStock() {
+  document.getElementById('outOfStockView').style.display = 'none';
+  document.getElementById('productList').style.display = 'block';
+}
+</script>
+
 
 
 <%- include('partials/footer') %>
