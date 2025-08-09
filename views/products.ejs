@@ -81,7 +81,7 @@
 </form>
 
   	    <button type="button" onclick="startScanner2()">📷 امسح الباركود</button>
-		<button type="button" id="closeBTN2"> اغلاق الكاميرا</button>
+		<button type="button" id="closeBTN2" style="display: none;"> اغلاق الكاميرا</button>
         <div id="scanner2" style="width:300px; display:none;"></div>
         <br>
 		<button id="showOutOnly" style="margin:10px;">📦 المنتجات المنتهية الكمية</button>
@@ -143,7 +143,7 @@
   <p>🕒 آخر بيع: <span id="popLastSold"></span></p>
   <p>🔢 الباركود: <span id="popBarcode"></span></p>
 
-  <button onclick="saveProduct()" style="margin-top:10px;">💾 حفظ التعديلات</button>
+  <button onclick="saveProduct()" style="margin-top:10px;"><a>💾 حفظ التعديلات</a></button>
   <button type="button"><a id="deleteLink" href="#" style="color:red; display:block; margin-top:10px;">🗑 حذف المنتج</a></button>
 </div>
 
