@@ -255,7 +255,7 @@ document.getElementById('showOutOfStock').addEventListener('click', () => {
   outList.innerHTML = '';
 
   allCards.forEach(card => {
-    if (card.querySelector('.qty') && card.querySelector('.qty').textContent.trim() === '0') {
+    if (card.querySelector('.out')) {
       outList.appendChild(card.cloneNode(true));
     }
   });
