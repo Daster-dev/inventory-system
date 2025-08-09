@@ -51,7 +51,7 @@
       <label>الباركود:</label>
       <input type="text" name="barcode" id="barcodeInput" required>
 	    <button type="button" onclick="startScanner()">📷 امسح الباركود</button>
-	    <button type="button" onClick="closeCam()" style="display: none;" id="closeBTN">close</button>
+	    <button type="button" style="display: none;" id="closeBTN">close</button>
         <div id="scanner" style="width:300px; display:none;"></div>
     </div>
 	
@@ -81,7 +81,7 @@
 </form>
 
   	    <button type="button" onclick="startScanner2()">📷 امسح الباركود</button>
-		<button type="button" onclick="closeCam2()" id="closeBTN2"> close</button>
+		<button type="button" id="closeBTN2"> close</button>
         <div id="scanner2" style="width:300px; display:none;"></div>
         <br>
 		<button id="showOutOnly" style="margin:10px;">📦 المنتجات المنتهية الكمية</button>
@@ -185,8 +185,6 @@ document.getElementById('closeBTN').addEventListener('click', async () => {
         scanner.stop();
 		const searchInput = document.getElementById("searchInput");
         searchInput.value = decodedText;
-		
-		
 		    const event = new Event('input', { bubbles: true });
             searchInput.dispatchEvent(event);
         document.getElementById("scanner2").style.display = "none";
@@ -195,6 +193,15 @@ document.getElementById('closeBTN').addEventListener('click', async () => {
         console.warn("خطأ بالقراءة:", errorMessage);
       }
     );
+document.getElementById('closeBTN2').addEventListener('click', async () => {
+  try {
+    await scanner.stop();
+    document.getElementById("scanner2").style.display = "none";
+    document.getElementById("closeBTN2").style.display = "none";
+  } catch (err) {
+    console.error('❌ فشل إيقاف الكاميرا:', err);
+  }
+});
   }
 
 </script>
