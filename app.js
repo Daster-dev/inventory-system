@@ -199,6 +199,17 @@ app.post('/sales/quick', async (req, res, next) => {
 
 
 
+app.post('/products/update/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+
+    await Product.updateOne({ id }, updates);
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false });
+  }
+});
 
 
 
