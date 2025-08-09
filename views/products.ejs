@@ -143,8 +143,12 @@
   <p>🕒 آخر بيع: <span id="popLastSold"></span></p>
   <p>🔢 الباركود: <span id="popBarcode"></span></p>
 
-  <button onclick="saveProduct()" style="margin-top:10px;"><a>💾 حفظ التعديلات</a></button>
-  <button type="button"><a id="deleteLink" href="#" style="color:red; display:block; margin-top:10px;">🗑 حذف المنتج</a></button>
+
+  
+  <form id="deleteForm" method="POST" action="">
+    <button type="button" onclick="saveProduct()" style="margin-top:10px;"><a>💾 حفظ التعديلات</a></button>
+     <button type="submit" style="color:red; margin-top:10px;">🗑 حذف المنتج</button>
+  </form>
 </div>
 
 
@@ -389,9 +393,8 @@ buttons.forEach(btn => {
     document.getElementById('popExpiry').value = btn.dataset.expiry;
     document.getElementById('popLastSold').textContent = btn.dataset.lastsold;
     document.getElementById('popBarcode').textContent = btn.dataset.barcode;
-
-    document.getElementById('deleteLink').href = `/products/delete/${btn.dataset.id}`;
-
+	document.getElementById('deleteForm').action = `/products/delete/${btn.dataset.id}`;
+	
     popout.style.display = 'block';
   });
 });
