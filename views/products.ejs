@@ -249,15 +249,16 @@ document.getElementById('productForm').addEventListener('submit', async function
   }
 });
 </script>
-<script>
 document.getElementById('showOutOnly').addEventListener('click', () => {
   const cards = document.querySelectorAll('.product-card');
 
   cards.forEach(card => {
     if (card.classList.contains('out')) {
-      card.style.display = 'grid';
+      card.style.opacity = '1';
+      card.style.pointerEvents = 'auto';
     } else {
-      card.style.display = 'none';
+      card.style.opacity = '0';
+      card.style.pointerEvents = 'none';
     }
   });
 
@@ -267,12 +268,16 @@ document.getElementById('showOutOnly').addEventListener('click', () => {
 
 document.getElementById('showAll').addEventListener('click', () => {
   const cards = document.querySelectorAll('.product-card');
-  cards.forEach(card => card.style.display = 'grid');
+
+  cards.forEach(card => {
+    card.style.opacity = '1';
+    card.style.pointerEvents = 'auto';
+  });
 
   document.getElementById('showOutOnly').style.display = 'inline-block';
   document.getElementById('showAll').style.display = 'none';
 });
-</script>
+
 
 
 
