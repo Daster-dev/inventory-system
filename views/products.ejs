@@ -163,6 +163,15 @@ function closeCam2(){
         console.warn("خطأ بالقراءة:", errorMessage);
       }
     );
+document.getElementById('closeBTN').addEventListener('click', async () => {
+  try {
+    await scanner.stop();
+    document.getElementById("scanner").style.display = "none";
+    document.getElementById("closeBTN").style.display = "none";
+  } catch (err) {
+    console.error('❌ فشل إيقاف الكاميرا:', err);
+  }
+});
   }
   
   function startScanner2() {
