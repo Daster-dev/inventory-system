@@ -255,7 +255,7 @@ document.getElementById('showOutOnly').addEventListener('click', () => {
 
   cards.forEach(card => {
     if (card.classList.contains('out')) {
-      card.style.display = 'block';
+      card.style.display = 'grid';
     } else {
       card.style.display = 'none';
     }
@@ -267,7 +267,7 @@ document.getElementById('showOutOnly').addEventListener('click', () => {
 
 document.getElementById('showAll').addEventListener('click', () => {
   const cards = document.querySelectorAll('.product-card');
-  cards.forEach(card => card.style.display = 'block');
+  cards.forEach(card => card.style.display = 'grid');
 
   document.getElementById('showOutOnly').style.display = 'inline-block';
   document.getElementById('showAll').style.display = 'none';
