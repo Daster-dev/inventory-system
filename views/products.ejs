@@ -168,11 +168,16 @@
   <p>السعر: <%= p.priceOut %>
   <p>الكمية: <%= p.qty %></p>
 
-  <button class="sell-btn" data-id="<%= p.id %>">تم البيع</button>
+  <button class="sell-btn" 
+  data-id="<%= p.id %>" 
+  <%= p.qty === 0 ? "disabled" : ""%> >
+  تم البيع
+  </button>
   <button type="button" class="add-to-cart"
   data-id="<%= p.id %>"
   data-name="<%= p.name %>"
-  data-price="<%= p.priceOut %>">
+  data-price="<%= p.priceOut %>"
+  <%= p.qty === 0 ? "disabled" : ""%>>
   ➕ إضافة إلى السلة
   </button>
 
