@@ -509,6 +509,29 @@ app.post('/return-product', async (req, res) => {
 
 
 
+app.post('/cart/checkout', async (req, res) => {
+  try {
+    const { items } = req.body;
+
+    for (const item of items) {
+      const prod = await Product.findOne({ id: item.id });
+      if (prod && prod.qty > 0) {
+        prod.qty -= 1;
+        prod.lastSold = new Date();
+        await prod.save();
+      }
+    }
+
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false });
+  }
+});
+
+
+
+
+
 
 
 

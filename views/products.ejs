@@ -169,6 +169,13 @@
   <p>الكمية: <%= p.qty %></p>
 
   <button class="sell-btn" data-id="<%= p.id %>">تم البيع</button>
+  <button type="button" class="add-to-cart"
+  data-id="<%= p.id %>"
+  data-name="<%= p.name %>"
+  data-price="<%= p.priceOut %>">
+  ➕ إضافة إلى السلة
+  </button>
+
 <form action="/return-product" method="POST" style="display:inline;">
   <input type="hidden" name="productId" value="<%= p.id %>">
   <button type="submit">↩️ إرجاع المنتج</button>
@@ -192,6 +199,42 @@
 
   <% }) %>
 </div>
+
+
+
+
+<div id="cartToast" style="
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 15px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  z-index: 999;
+  display: none;
+  width: 300px;
+  text-align: center;
+">
+  <div id="cartSummary">
+    🛒 السعر الإجمالي: <span id="cartTotal">0</span> دينار
+  </div>
+
+  <button id="checkoutBtn" style="margin-top:10px;">✅ تم البيع</button>
+
+  <div id="cartDropdown" style="
+    margin-top:10px;
+    background:#f9f9f9;
+    border-top:1px solid #ccc;
+    display:none;
+    text-align:left;
+    padding:10px;
+  "></div>
+</div>
+
+
+
 
 
 <script src="/js/main.js"></script>
@@ -441,14 +484,94 @@ async function saveProduct() {
     alert('❌ خطأ في الاتصال بالسيرفر');
   }
 }
-
-
-
-
-
-
 </script>
 
+<script> 
 
+
+
+
+
+
+
+
+
+
+
+const cart = [];
+const cartToast = document.getElementById('cartToast');
+const cartTotal = document.getElementById('cartTotal');
+const cartDropdown = document.getElementById('cartDropdown');
+
+document.querySelectorAll('.add-to-cart').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const id = btn.dataset.id;
+    const name = btn.dataset.name;
+    const price = parseFloat(btn.dataset.price);
+
+    // تحقق إذا المنتج موجود مسبقًا
+    const existing = cart.find(item => item.id === id);
+    if (!existing) {
+      cart.push({ id, name, price });
+    }
+
+    updateCartUI();
+  });
+});
+
+function updateCartUI() {
+  if (cart.length === 0) {
+    cartToast.style.display = 'none';
+    return;
+  }
+
+  cartToast.style.display = 'block';
+
+  // تحديث السعر الإجمالي
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  cartTotal.textContent = total.toFixed(2);
+
+  // تحديث القائمة المنسدلة
+  cartDropdown.innerHTML = '';
+  cart.forEach(item => {
+    const line = document.createElement('div');
+    line.textContent = `${item.name} — ${item.price} دينار`;
+    cartDropdown.appendChild(line);
+  });
+}
+
+// إظهار القائمة عند hover
+cartToast.addEventListener('mouseenter', () => {
+  cartDropdown.style.display = 'block';
+});
+cartToast.addEventListener('mouseleave', () => {
+  cartDropdown.style.display = 'none';
+});
+
+// تنفيذ البيع
+document.getElementById('checkoutBtn').addEventListener('click', async () => {
+  try {
+    const res = await fetch('/cart/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: cart })
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      alert('✅ تم بيع المنتجات بنجاح');
+      cart.length = 0;
+      updateCartUI();
+      location.reload();
+    } else {
+      alert('❌ فشل البيع');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('❌ خطأ في الاتصال بالسيرفر');
+  }
+});
+
+</script>
 
 <%- include('partials/footer') %>
