@@ -506,12 +506,15 @@ app.post('/return-product', async (req, res) => {
 
 
 
-
-
-
 app.post('/cart/checkout', async (req, res) => {
   try {
+	  
+    const saleCount = await Sale.countDocuments();
+    const saleId    = (saleCount + 1).toString();
     const { items } = req.body;
+
+    const saleItems = [];
+    let saleTotal = 0;
 
     for (const item of items) {
       const prod = await Product.findOne({ id: item.id });
@@ -519,14 +522,37 @@ app.post('/cart/checkout', async (req, res) => {
         prod.qty -= 1;
         prod.lastSold = new Date();
         await prod.save();
+
+        saleItems.push({
+          productId: prod.id,
+          name: prod.name,
+          qty: 1,
+          priceOut: prod.priceOut,
+          priceIn: prod.priceIn
+        });
+
+        saleTotal += prod.priceOut;
       }
     }
 
+    // حفظ عملية البيع
+    const sale = new Sale({
+      id: saleId,
+      date: new Date(),
+      items: saleItems,
+      paymentMethod: "cash",
+      orderNo: saleId
+    });
+
+    await sale.save();
+
     res.json({ success: true });
   } catch (err) {
+    console.error(err);
     res.json({ success: false });
   }
 });
+
 
 
 
