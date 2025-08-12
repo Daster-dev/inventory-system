@@ -173,6 +173,7 @@
   <%= p.qty === 0 ? "disabled" : ""%> >
   تم البيع
   </button>
+  <button><a herf="/products/<%= p.id %>">تفاصيل المنتج</a></button>
   <button type="button" class="add-to-cart"
   data-id="<%= p.id %>"
   data-name="<%= p.name %>"
