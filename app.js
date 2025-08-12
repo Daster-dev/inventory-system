@@ -555,7 +555,25 @@ app.post('/cart/checkout', async (req, res) => {
 
 
 
+app.get('/products/:id', async (req, res) => {
+  const product = await Product.findOne({ id: req.params.id });
+  if (!product) return res.status(404).send('المنتج غير موجود');
 
+  res.render('product-details', { product });
+});
+
+
+app.post('/products/update/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+
+    await Product.updateOne({ id }, updates);
+    res.json({ success: true });
+  } catch (err) {
+    res.json({ success: false });
+  }
+});
 
 
 

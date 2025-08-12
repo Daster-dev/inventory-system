@@ -1,0 +1,141 @@
+
+  <style>
+
+    .card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .info {
+      padding: 30px;
+      text-align: right;
+    }
+
+    .info h2 {
+      margin-top: 0;
+      color: #333;
+    }
+
+    .info p {
+      margin: 10px 0;
+      font-size: 16px;
+      color: #555;
+    }
+  </style>
+
+  <div class="card">
+    <div>
+      <img src="<%= product.imgPath || '/default.jpg' %>" alt="صورة المنتج">
+    </div>
+    <div class="info">
+      <h2><%= product.name %></h2>
+      <p>📦 القسم: <%= product.category %></p>
+      <p>💰 سعر الشراء: <%= product.priceIn %> د.ع</p>
+      <p>💸 سعر البيع: <%= product.priceOut %> د.ع</p>
+      <p>📊 الكمية المتوفرة: <%= product.qty %></p>
+      <p>🕒 آخر بيع: <%= product.lastSold ? product.lastSold.toLocaleDateString() : '--' %></p>
+      <p>🆔 رقم المنتج: <%= product.id %></p>
+      <p>📅 تاريخ الانتهاء: <%= product.expiryDate || '--' %></p>
+      <div style="text-align: center; margin-top: 30px;">
+  <button onclick="openEditForm()" style="margin: 10px;">✏️ تعديل المنتج</button>
+  <a href="/products/delete/<%= product.id %>" style="color: red; margin: 10px;">🗑 حذف المنتج</a>
+</div>
+
+    </div>
+  </div>
+  
+  
+  
+  
+  
+  
+<div id="editForm" style="
+  display: none;
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 1px solid #ccc;
+  padding: 20px;
+  z-index: 999;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+">
+  <button onclick="closeEditForm()" style="float: left;">❌</button>
+  <h3 style="text-align: right;">🛠 تعديل المنتج</h3>
+
+  <form id="editProductForm">
+    <input type="hidden" name="id" value="<%= product.id %>">
+
+    <label>📛 الاسم:</label>
+    <input type="text" name="name" value="<%= product.name %>" required>
+
+    <label>📦 القسم:</label>
+    <input type="text" name="category" value="<%= product.category %>" required>
+
+    <label>💰 سعر الشراء:</label>
+    <input type="number" name="priceIn" value="<%= product.priceIn %>" required>
+
+    <label>💸 سعر البيع:</label>
+    <input type="number" name="priceOut" value="<%= product.priceOut %>" required>
+
+    <label>📊 الكمية:</label>
+    <input type="number" name="qty" value="<%= product.qty %>" required>
+
+    <label>📅 تاريخ الانتهاء:</label>
+    <input type="date" name="expiryDate" value="<%= product.expiryDate %>">
+
+    <button type="submit" style="margin-top: 10px;">💾 حفظ التعديلات</button>
+  </form>
+</div>
+
+  
+  <script>
+function openEditForm() {
+  document.getElementById('editForm').style.display = 'block';
+}
+
+function closeEditForm() {
+  document.getElementById('editForm').style.display = 'none';
+}
+
+document.getElementById('editProductForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const data = Object.fromEntries(formData.entries());
+
+  try {
+    const res = await fetch(`/products/update/${data.id}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+    if (result.success) {
+      alert('✅ تم تعديل المنتج بنجاح');
+      location.reload();
+    } else {
+      alert('❌ فشل التعديل');
+    }
+  } catch (err) {
+    console.error(err);
+    alert('⚠️ خطأ في الاتصال بالسيرفر');
+  }
+});
+</script>
