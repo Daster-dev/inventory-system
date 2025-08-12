@@ -559,7 +559,7 @@ app.get('/products/:id', async (req, res) => {
   const product = await Product.findOne({ id: req.params.id });
   if (!product) return res.status(404).send('المنتج غير موجود');
 
-  res.render('product-details', { product });
+  res.render('product-details', { product,  activePage: 'products'});
 });
 
 
